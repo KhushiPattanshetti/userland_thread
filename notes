@@ -1,1 +1,3 @@
-notes
+NOTES 
+
+1. Userland threads are the threads that work in the user mode, without the kernel knowing about it. 
