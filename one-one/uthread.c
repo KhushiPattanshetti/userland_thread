@@ -7,7 +7,7 @@
 #include <signal.h>
 #include "uthread.h"
 
-#define STACK_SIZE (1024 * 1024)  
+#define SS (1024 * 1024)  
 
 int child_function(void *arg) {
     if (arg == NULL) {
@@ -34,13 +34,13 @@ int uthread_create(uthread_t *thread, void *(*start_routine)(void *), void *arg)
         return -1;
     }
 
-    thread->stack = malloc(STACK_SIZE);
+    thread->stack = malloc(SS);
     if (thread->stack == NULL) {
         perror("Failed to allocate stack");
         return -1;
     }
 
-    void *stack_top = (char *)thread->stack + STACK_SIZE - sizeof(void *);
+    void *stack_top = (char *)thread->stack + SS - sizeof(void *);
 
     void **args = malloc(2 * sizeof(void *));
     if (args == NULL) {
